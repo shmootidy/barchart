@@ -1,0 +1,7 @@
+#chart-container {
+  background-color: aliceblue;
+  width: 35%;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 3px;
+}
