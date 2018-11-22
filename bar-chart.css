@@ -1,24 +1,42 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  text-align: center;
+}
+
 #chart-container {
   background-color: aliceblue;
   width: 35%;
-  height: 200px;
+  height: 100px;
   border: 2px solid black;
   border-radius: 3px;
-  position: relative;
-}
-
-.bar {
-  background-color: navy;
-  height: 50px;
-  width: 20px;
-  float: bottom;
-  display: inline;
-  margin-right: -3px;
-  color: white;
+  position: relative; /* DON'T CHANGE THIS! Needs to be relative for the absolute position of bar-container to give desired result*/
 }
 
 #bar-container {
   position: absolute;
   bottom: 0;
   background-color: red;
+  /*margin: 5px;*/
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+}
+
+
+.bar {
+  background-color: navy;
+  height: 50px;
+  width: 20px;
+  position: relative;
+  bottom: 0;
+  display: inline;
+  /*margin-right: -3px;*/ /* This puts the bars off-center in their bar-container; reconsider how to adjust space between bars. */
+  color: white;
+}
+
+
+h3{
+  background-color: white;
 }
