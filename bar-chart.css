@@ -4,4 +4,21 @@
   height: 200px;
   border: 2px solid black;
   border-radius: 3px;
+  position: relative;
+}
+
+.bar {
+  background-color: navy;
+  height: 50px;
+  width: 20px;
+  float: bottom;
+  display: inline;
+  margin-right: -3px;
+  color: white;
+}
+
+#bar-container {
+  position: absolute;
+  bottom: 0;
+  background-color: red;
 }
