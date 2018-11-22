@@ -9,7 +9,7 @@ body {
 #chart-container {
   background-color: aliceblue;
   width: 35%;
-  height: 100px;
+  height: 200px;
   border: 2px solid black;
   border-radius: 3px;
   position: relative; /* DON'T CHANGE THIS! Needs to be relative for the absolute position of bar-container to give desired result*/
@@ -22,23 +22,24 @@ h3{
 #bar-container {
   position: absolute;
   bottom: 0;
-  border: 1px solid black;
-  margin: 5px;
   left: 0;
   right: 0;
   height: 50%;
+  width: 95%;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  padding-left: 10px;
 }
 
 
 .bar {
   background-color: navy;
-  height: 100%;
-  width: 20px;
   position: relative;
-  /*bottom: 0;*/ /* This does nothing. The bars are floating at the top of their container... */
-  display: inline;
-  /*margin-right: -3px;*/ /* This puts the bars off-center in their bar-container; reconsider how to adjust space between bars. */
   color: white;
+}
+
+.label {
+   height: 5px;
 }
 
 

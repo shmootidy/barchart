@@ -4,11 +4,21 @@
 <body>
   <div id="chart-container">
     <h3>Title of the Chart</h3>
-    <div id="bar-container"> <!-- this container holds the absolute position property to preserve the inline display of the bars below -->
-      <div class="bar">bar1</div>
-
-      <div class="bar">bar2</div> <!-- These are sample divs to test out the CSS -->
-    </div>
+    <table id="bar-container">
+      <tr class="bar">
+        <td class="bar">bar1</td>
+        <td class="bar">bar2</td>
+        <td class="bar">bar3</td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="label">label1</th>
+        <th class="label">label2</th>
+        <th class="label">label3</th>
+      </tr>
+    </table>
   </div>
 </body>
 
