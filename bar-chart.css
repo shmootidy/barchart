@@ -2,8 +2,6 @@ body {
   font-family: Verdana, Geneva, sans-serif;
   text-align: center;
   position: relative;
-  top: 100px;
-  left: 100px;
 }
 
 #chart-container {
@@ -15,11 +13,8 @@ body {
   position: relative; /* DON'T CHANGE THIS! Needs to be relative for the absolute position of bar-container to give desired result*/
 }
 
-h3{
-  background-color: white;
-}
-
 #bar-container {
+  border-spacing: 20px 0; /* adds space between the bars */
   position: absolute;
   bottom: 0;
   left: 0;
@@ -31,15 +26,20 @@ h3{
   padding-left: 10px;
 }
 
+h3{
+  background-color: white;
+}
 
 .bar {
   background-color: navy;
   position: relative;
   color: white;
+  vertical-align: null; /* position the in-bar text at "top" "bottom" or null (for middle) */
 }
 
 .label {
    height: 5px;
+   background-color: linen;
 }
 
 
