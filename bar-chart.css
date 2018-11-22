@@ -2,7 +2,7 @@
   box-sizing: border-box; /* this ensures all elements size specifications ignore padding */
 }
 
-html, body {
+body {
   margin: 0;
   display: flex; /* defines the doc as a flex container, allowing bars to move dynamically side to side without using float or position */
   justify-content: center; /* aligns the flex contents (bars) in the center */
@@ -10,35 +10,40 @@ html, body {
   text-align: center;
 }
 
-#chart-container {
+h3{
+  background-color: white;
+}
+
+#chart{
   background-color: aliceblue;
   border: 2px solid black;
   border-radius: 3px;
+}
+
+/*#y-axis {
+  display: inline-block;
+}
+*/
+#chart-container {
   display: grid; /* defines container as a grid container, allowing bars to move up and down  */
   grid-column-gap: 5px; /* gives space between bars */
   height: 50vh; /* sets height of each bar to full size of viewport */
   width: 70vh; /* width to 70% of viewport */
   padding: 5px 10px;
-}
-
-h3{
-  background-color: white;
+  grid-template-columns: repeat(num, 1fr);
+  grid-template-rows: repeat(100, 1fr);
 }
 
 [class*="bar"] {
   margin: 0;
   padding: 0;
   border-radius: 5px 5px 0 0; /* soften the edges of the tops of the bars */
-  grid-row-end: 101; /* WHAT DOES THIS MEAN? */
+  grid-row-end: 100; /* the code I am working from set this to 101 and 102 in different examples, unsure why extending length of each column by an extra row is useful, perhaps to avoid white space?  */
   color: white;
 }
 
-.bar-0 {
-
-}
-
 .bar-1 {
-  grid-row-start: 1; /* these numbers will need to be converted as they are from the top */
+  grid-row-start: 1; /* these numbers will need to be converted as they count down from the top */
 }
 
 .bar-2 {
@@ -56,4 +61,5 @@ h3{
 [class*="bar"]:nth-child(even){
   background-color: #0074d9;
 }
+
 
