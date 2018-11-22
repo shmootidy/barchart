@@ -1,6 +1,9 @@
 body {
   font-family: Verdana, Geneva, sans-serif;
   text-align: center;
+  position: relative;
+  top: 100px;
+  left: 100px;
 }
 
 #chart-container {
@@ -12,31 +15,30 @@ body {
   position: relative; /* DON'T CHANGE THIS! Needs to be relative for the absolute position of bar-container to give desired result*/
 }
 
+h3{
+  background-color: white;
+}
+
 #bar-container {
   position: absolute;
   bottom: 0;
-  background-color: red;
-  /*margin: 5px;*/
+  border: 1px solid black;
+  margin: 5px;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  top: 10%;
+  height: 50%;
 }
 
 
 .bar {
   background-color: navy;
-  height: 50px;
+  height: 100%;
   width: 20px;
   position: relative;
-  bottom: 0;
+  /*bottom: 0;*/ /* This does nothing. The bars are floating at the top of their container... */
   display: inline;
   /*margin-right: -3px;*/ /* This puts the bars off-center in their bar-container; reconsider how to adjust space between bars. */
   color: white;
 }
 
 
-h3{
-  background-color: white;
-}
