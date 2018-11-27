@@ -1,65 +1,90 @@
-* {
-  box-sizing: border-box; /* this ensures all elements size specifications ignore padding */
-}
+@import url(http://fonts.googleapis.com/css?family=Roboto:400+700);
 
 body {
-  margin: 0;
-  display: flex; /* defines the doc as a flex container, allowing bars to move dynamically side to side without using float or position */
-  justify-content: center; /* aligns the flex contents (bars) in the center */
-  font-family: Verdana, Geneva, sans-serif;
-  text-align: center;
+  background: #30303A;
+  font-family: Roboto;
 }
 
-h3{
-  background-color: white;
+#chart {
+  width: 650px;
+  height: 300;
+  margin: 30px auto 0;
+  display: block;
 }
 
-#chart{
-  background-color: aliceblue;
-  border: 2px solid black;
-  border-radius: 3px;
-}
-
-/*#y-axis {
-  display: inline-block;
-}
-*/
-#chart-container {
-  display: grid; /* defines container as a grid container, allowing bars to move up and down  */
-  grid-column-gap: 5px; /* gives space between bars */
-  height: 50vh; /* sets height of each bar to full size of viewport */
-  width: 70vh; /* width to 70% of viewport */
-  padding: 5px 10px;
-  grid-template-columns: repeat(num, 1fr);
-  grid-template-rows: repeat(100, 1fr);
-}
-
-[class*="bar"] {
+#chart #numbers {
+  height: 100%;
+  width: 50px;
   margin: 0;
   padding: 0;
-  border-radius: 5px 5px 0 0; /* soften the edges of the tops of the bars */
-  grid-row-end: 100; /* the code I am working from set this to 101 and 102 in different examples, unsure why extending length of each column by an extra row is useful, perhaps to avoid white space?  */
+  display: inline-block;
+  float: left;
+}
+
+#chart #numbers li {
+  text-align: right;
+  padding-right: 1em;
+  list-style: none;
+  height: 29px;
+  border-bottom: 1px solid #444;
+  position: relative;
+  bottom: 30px;
+}
+
+#chart #numbers li:last-child { height: 30px; }
+
+#chart #numbers li span {
+  color: #eee;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+#chart #bars {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 1px #444;
+}
+
+#chart #bars li {
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+
+#chart #bars li .bar {
+  display: block;
+  width: 70px;
+  margin-left: 15px;
+  background: #49E;
+  position: absolute;
+  bottom: 0;
+}
+
+#chart #bars li .bar:hover {
+  background: #5AE;
+  cursor: pointer;
+}
+
+#chart #bars li .bar:hover:before {
   color: white;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
 }
 
-.bar-1 {
-  grid-row-start: 1; /* these numbers will need to be converted as they count down from the top */
+#chart #bars li span {
+  color: #eee;
+  width: 100%;
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  text-align: center;
 }
-
-.bar-2 {
-  grid-row-start: 30;
-}
-
-.bar-3 {
-  grid-row-start: 20;
-}
-
-[class*="bar"]:nth-child(odd){
-  background-color: #ff4136;
-}
-
-[class*="bar"]:nth-child(even){
-  background-color: #0074d9;
-}
-
-
