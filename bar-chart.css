@@ -1,15 +1,37 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400+700);
-
 body {
   background: #30303A;
-  font-family: Roboto;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 14px;
+  color: #eee;
+}
+
+h1 {
+  color: #eee;
+  text-align: center;
 }
 
 #chart {
-  width: 650px;
-  height: 300;
+  width: 684px; /*650+1em(14px)+20px*/
+  height: 300px;
   margin: 30px auto 0;
   display: block;
+}
+
+#chart #y-axis{
+  height: 100%;
+  width: 1em;
+  margin: 0 20px 0 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+}
+
+#chart #y-axis li {
+  list-style: none;
+  transform: rotate(270deg);
+  position: relative;
+  top: 50%;
+  white-space: nowrap;
 }
 
 #chart #numbers {
@@ -25,13 +47,24 @@ body {
   text-align: right;
   padding-right: 1em;
   list-style: none;
-  height: 29px;
-  border-bottom: 1px solid #444;
+  height: 29px; /* 29px + 1px (border) = 30px */
   position: relative;
-  bottom: 30px;
+  bottom: 30px; /* lift up the whole list to make room for the last one */
+  border-bottom: 1px solid #444; /* see below for alternating visible lines */
 }
 
-#chart #numbers li:last-child { height: 30px; }
+/*#chart #numbers li:nth-child(even) {
+  border-bottom: 1px solid transparent;
+}
+
+#chart #numbers li:nth-child(odd) {
+  border-bottom: 1px solid #444;
+}
+*/
+#chart #numbers li:last-child {
+  height: 30px;
+  /*border-bottom: 1px solid transparent;*/
+}
 
 #chart #numbers li span {
   color: #eee;
@@ -47,7 +80,7 @@ body {
   height: 300px;
   padding: 0;
   margin: 0;
-  box-shadow: 0 0 0 1px #444;
+  box-shadow: 0 0 0 1px #444; /* creates the border around the bars container */
 }
 
 #chart #bars li {
@@ -76,8 +109,12 @@ body {
 #chart #bars li .bar:hover:before {
   color: white;
   content: attr(data-percentage) '%';
-  position: relative;
-  bottom: 20px;
+  position: absolute; /* allow text to move */
+  top: 10px; /* options for text location below */
+  /*top: 50%;*/
+  /*bottom: 10px;*/
+  left: 1em; /* this centers the text */
+  right: 1em;
 }
 
 #chart #bars li span {
@@ -87,4 +124,10 @@ body {
   bottom: -2em;
   left: 0;
   text-align: center;
+}
+
+#chart #x-axis {
+  text-align: center;
+  position: relative;
+  top: 50px;
 }
