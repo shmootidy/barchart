@@ -17,15 +17,6 @@ h1 {
   display: inline-block;
 }
 
-#chart #input-container {
-  height: 100%;
-  width: 200px;
-  background-color: #eee;
-  margin-right: 20px;
-  display: inline-block;
-  float: left;
-}
-
 #chart #y-axis{
   height: 100%;
   width: 1em;
@@ -72,7 +63,7 @@ h1 {
 */
 #chart #numbers li:last-child {
   height: 30px;
-  /*border-bottom: 1px solid transparent;*/
+  border-bottom: 1px solid transparent;
 }
 
 #chart #numbers li span {
