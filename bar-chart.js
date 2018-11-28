@@ -31,7 +31,7 @@ generateYAxis();
   $("#chart #x-axis span").append(xAxisLabel);
 
   $("#chart #bars").attr({
-    "height": customHeight,
+    // "height": customHeight,
   });
 
   var numOfBars = data.length;

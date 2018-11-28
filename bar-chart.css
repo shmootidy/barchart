@@ -1,3 +1,5 @@
+* { box-sizing: border-box; }
+
 body {
   background: #30303A;
   font-family: Verdana, Arial, sans-serif;
@@ -11,13 +13,12 @@ h1 {
 }
 
 #chart {
-  /*width: 684px; 650+1em(14px)+20px, with block display */
-  height: 300px;
+  height: 300px; /* HEIGHT OF CHART */
   margin: 30px auto 0;
   display: inline-block;
 }
 
-#chart #y-axis{
+#chart #y-axis {
   height: 100%;
   width: 1em;
   margin: 0 20px 0 0;
@@ -47,9 +48,9 @@ h1 {
   text-align: right;
   padding-right: 1em;
   list-style: none;
-  height: 29px; /* 29px + 1px (border) = 30px */
+  height: 30px; /* 29px + 1px (border) = 30px */
   position: relative;
-  bottom: 30px; /* lift up the whole list to make room for the last one */
+  bottom: 29px; /* lift up the whole list to make room for the last one */
   border-bottom: 1px solid #444; /* see below for alternating visible lines */
 }
 
@@ -74,59 +75,104 @@ h1 {
 }
 
 #chart #bars {
-  /* height and width are created in js */
+  height: 100%;
+  width: 600px;
   display: inline-block;
   background: rgba(0, 0, 0, 0.2);
   padding: 0;
   margin: 0;
-  box-shadow: 0 0 0 1px #444; /* creates the border around the bars container */
+  /*box-shadow: 0 0 0 1px #444;  creates the border around the bars container */
+  border: 1px #444 solid;
 }
 
-#chart #bars li {
-  display: table-cell;
-  width: 100px;
-  height: 300px;
-  margin: 0;
+#chart #boop {
   text-align: center;
   position: relative;
 }
 
-#chart #bars li .bar {
-  display: block;
-  width: 70px;
-  margin-left: 15px;
-  background: #49E;
-  position: absolute;
-  bottom: 0;
-}
-
-#chart #bars li .bar:hover {
-  background: #5AE;
-  cursor: pointer;
-}
-
-#chart #bars li .bar:hover:before {
-  color: white;
-  content: attr(data-percentage) '%';
-  position: absolute; /* allow text to move */
-  top: 10px; /* options for text location below */
-  /*top: 50%;*/
-  /*bottom: 10px;*/
-  left: 1em; /* this centers the text */
-  right: 1em;
-}
-
-#chart #bars li span {
-  color: #eee;
-  width: 100%;
-  position: absolute;
-  bottom: -2em;
-  left: 0;
-  text-align: center;
+#chart #beep {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 5px;
+  padding: 10px 10px 0 94px;
 }
 
 #chart #x-axis {
   text-align: center;
   position: relative;
-  top: 50px;
+  top: 20px;
 }
+
+.chart-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  grid-column-gap: 5px;
+  height: 100%;
+  width: 100%;
+  padding: 5px 10px 0 10px;
+}
+
+[class*="bar-"] {
+  margin: 0;
+  padding: 0;
+  border-radius: 5px 5px 0 0;
+  grid-row-end: 102;
+}
+
+.bar-1 {
+  grid-row-start: 45;
+}
+
+.bar-2 {
+  grid-row-start: 30;
+}
+
+.bar-3 {
+  grid-row-start: 20;
+}
+
+.bar-4 {
+  grid-row-start: 50;
+}
+
+.bar-5 {
+  grid-row-start: 60;
+}
+
+.bar-6 {
+  grid-row-start: 20;
+}
+
+.bar-7 {
+  grid-row-start: 30;
+}
+
+.bar-8 {
+  grid-row-start: 10;
+}
+
+.bar-9 {
+  grid-row-start: 80;
+}
+
+.bar-10 {
+  grid-row-start: 40;
+}
+
+.bar-11 {
+  grid-row-start: 20;
+}
+
+.bar-12 {
+  grid-row-start: 60;
+}
+
+[class*="bar"]:nth-child(odd) {
+ background-color: #ff4136;
+}
+
+[class*="bar"]:nth-child(even) {
+ background-color: #0074d9;
+}
+
