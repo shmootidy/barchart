@@ -13,7 +13,7 @@ $(function(){
   ];
   var options = {
     gaps: 5,
-    inBarLabelHeight: top; // or above, middle, bottom; variable for different heights of bars
+    // inBarLabelHeight: top; // or above, middle, bottom; variable for different heights of bars
   };
   var element;
 
