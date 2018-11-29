@@ -18,7 +18,7 @@ h1 {
   display: inline-block;
 }
 
-#chart #y-axis {
+#y-axis {
   height: 100%;
   width: 1em;
   margin: 0 20px 0 0;
@@ -27,7 +27,7 @@ h1 {
   float: left;
 }
 
-#chart #y-axis li {
+#y-axis li {
   list-style: none;
   transform: rotate(270deg);
   position: relative;
@@ -35,7 +35,7 @@ h1 {
   white-space: nowrap;
 }
 
-#chart #numbers {
+#numbers {
   height: 100%;
   width: 50px;
   margin: 0;
@@ -44,7 +44,7 @@ h1 {
   float: left;
 }
 
-#chart #numbers li {
+#numbers li {
   text-align: right;
   padding-right: 1em;
   list-style: none;
@@ -62,42 +62,41 @@ h1 {
   border-bottom: 1px solid #444;
 }
 */
-#chart #numbers li:last-child {
+#numbers li:last-child {
   height: 30px;
   border-bottom: 1px solid transparent;
 }
 
-#chart #numbers li span {
+#numbers li span {
   color: #eee;
   position: absolute;
   bottom: 0;
   right: 10px;
 }
 
-#chart #bars {
+#bars {
   height: 100%;
   width: 600px;
   display: inline-block;
   background: rgba(0, 0, 0, 0.2);
   padding: 0;
   margin: 0;
-  /*box-shadow: 0 0 0 1px #444;  creates the border around the bars container */
   border: 1px #444 solid;
 }
 
-#chart #boop {
+#boop {
   text-align: center;
   position: relative;
 }
 
-#chart #beep {
+#beep {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 5px;
   padding: 10px 10px 0 94px;
 }
 
-#chart #x-axis {
+#x-axis {
   text-align: center;
   position: relative;
   top: 20px;
@@ -105,7 +104,7 @@ h1 {
 
 .chart-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /*grid-template-columns: repeat(5, 1fr); by not specifying, it is created automatically based on number of child divs*/
   grid-template-rows: repeat(100, 1fr);
   grid-column-gap: 5px;
   height: 100%;
@@ -118,54 +117,6 @@ h1 {
   padding: 0;
   border-radius: 5px 5px 0 0;
   grid-row-end: 102;
-}
-
-.bar-1 {
-  grid-row-start: 45;
-}
-
-.bar-2 {
-  grid-row-start: 30;
-}
-
-.bar-3 {
-  grid-row-start: 20;
-}
-
-.bar-4 {
-  grid-row-start: 50;
-}
-
-.bar-5 {
-  grid-row-start: 60;
-}
-
-.bar-6 {
-  grid-row-start: 20;
-}
-
-.bar-7 {
-  grid-row-start: 30;
-}
-
-.bar-8 {
-  grid-row-start: 10;
-}
-
-.bar-9 {
-  grid-row-start: 80;
-}
-
-.bar-10 {
-  grid-row-start: 40;
-}
-
-.bar-11 {
-  grid-row-start: 20;
-}
-
-.bar-12 {
-  grid-row-start: 60;
 }
 
 [class*="bar"]:nth-child(odd) {

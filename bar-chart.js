@@ -1,71 +1,70 @@
 $(function(){
-  //things coming in from the user:
-  var data = [ //so far this is only used for its length
-    {label: "Option 1", dataPercentage: 56},
-    {label: "Option 2", dataPercentage: 24},
-    {label: "Option 3", dataPercentage: 87},
-    {label: "Option 4", dataPercentage: 12},
-    {label: "Option 5", dataPercentage: 75},
-    {label: "Option 6", dataPercentage: 49}
-    ];
-  var yAxisLabel = "Y-Axis Label";
-  var xAxisLabel = "X-Axis Label";
-  var customWidth = 600; // used to determine width of columns, available space between bars, not applied directly
-  var customHeight = 300;
-  var title = "My Bar Chart";
-  var yAxisTicks = 10;
-
-function generateYAxis(){
-  var topValue = 100;
-  for (var i = 0; i < yAxisTicks; i++){
-    $("#numbers").append("<li><span>" + topValue + "%</li></span>");
-    topValue = topValue - 10;
-  }
-  $("#numbers").append("<li><span></li></span>");
-}
-generateYAxis();
-
-
-  $("h1").append(title);
-  $("#chart #y-axis li span").append(yAxisLabel);
-  $("#chart #x-axis span").append(xAxisLabel);
-
-  $("#chart #bars").attr({
-    // "height": customHeight,
-  });
-
-  var numOfBars = data.length;
-  var columnWidth = customWidth / numOfBars; //100
-  var barSpacing = 30; //USER INPUT - must be smaller than columnWidth
-  var barWidth = columnWidth - barSpacing; //70
-  var barMargin = barSpacing / 2; //15
-  // $("#chart #bars li").attr({"width": columnWidth});
-  // $("#chart").load(location.href + " #chart>*", ""); //not working
-
-
-
-  var options;
-  // = {
-  //   chartHeight,
-  //   chartWidth,
-  //   barColors: {},
-  //   barSpacing,
-  //   titleFontSize,
-  //   titleFontColor,
-  // };
+  var data = [1, 2, 3, 4, 5];
+  var options = {
+    gaps: 5,
+  };
   var element;
 
-  function makeBarChart(){
+// var chartHeight = 250;
+// chartDimensions();
+// function chartDimensions(){
+//   $("#chart").attr("style", "height: " + chartHeight);
+// }
+  // function styleChartContainer(){
+  //   $(".chart-container").attr({
+  //     "grid-column-gaps": 5 + "px",
+  //   })
+  // }
 
-    $("#bars li .bar").each(function(key, bar){
-    var percentage = $(this).data('percentage');
+//generate and style bars
+  var numOfBars = data.length; // 5
+  var num = 0;
 
-    $(this).animate({
-      'height':percentage+'%'
-    }, 1000);
-  });
+  function generateBars(){
+    for (var i = 0; i < numOfBars; i++){
+        var randomNum = Math.floor(Math.random() * 100); //TO BY REPLACED BY USER INPUT
+
+      //create <div>s
+      num = num + 1;
+      var className = "bar-" + num;
+      $("<div></div>").attr({
+        "class": className,
+        "style": "grid-row-start: " + randomNum,
+      }).appendTo(".chart-container");
+    }
   }
+  generateBars();
 
+// fill the chart title with custom text
+  var title = "My Bar Chart";
+  function fillTitle(){
+    $("h1").append(title);
+  }
+  fillTitle();
+
+// generate and fill y-axis and label
+  var yAxisTicks = 10;
+  var yAxisLabel = "Y-Axis Label";
+  $("#chart #y-axis li span").append(yAxisLabel);
+  function generateYAxis(){
+    var topValue = 100;
+    for (var i = 0; i < yAxisTicks; i++){
+      $("#numbers").append("<li><span>" + topValue + "%</li></span>");
+      topValue = topValue - 10;
+    }
+    $("#numbers").append("<li><span></li></span>");
+  }
+  generateYAxis();
+
+//fill x-axis label
+  var xAxisLabel = "X-Axis Label";
+  $("#chart #x-axis span").append(xAxisLabel);
+
+//aiming to fit everything in here
   makeBarChart(data, options, element);
+  function makeBarChart(data, options, element){
+
+  };
+
 });
 
