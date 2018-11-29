@@ -3,9 +3,9 @@ $(function(){
     {item: "dog",
      amount: 49},
     {item: "cat",
-     amount: 87},
+     amount: 97},
     {item: "platypus",
-     amount: 14},
+     amount: 4},
     {item: "donkey",
      amount: 19},
     {item: "porcupine",
@@ -29,11 +29,11 @@ $(function(){
         odd: "#1a77ff",
         even: "#e2638e",
       },
-      inBarLabelHeight: 1, // three options: top, middle, bottom
+      inBarLabelHeight: 4, // four options: hover, top, middle, bottom
       barRadius: 3,
     },
     xAxis: {
-      xStyle: 1, // 3 options: outline, background, color (of text)
+      xStyle: 1, // 1: outline; 2: background; 3: text color
     },
     yAxis: {
       xAxisTitle: "X-Axis Title",
@@ -44,12 +44,11 @@ $(function(){
   var element;
 
 //crawl through options to return desired value
-function getOptions(optionKey){  //call with value name in quotes, e.g., getoptions("title");
+function getOptions(optionKey){
   $.each(options, crawler);
   function crawler(key, value){
     if (optionKey == key){
       optionKey = value;
-      // console.log(optionKey);
       return optionKey;
     }
     if (value !== null && typeof value === "object"){
@@ -76,8 +75,7 @@ function getOptions(optionKey){  //call with value name in quotes, e.g., getopti
       var barHeightInverse = 100 - barHeight;
 
       //create bars and give height
-            var barRadius = getOptions("barRadius");
-
+      var barRadius = getOptions("barRadius");
       var barClassName = "bar-" + num;
       var bar = $("<div></div>").attr({
         "class": barClassName,
@@ -85,7 +83,36 @@ function getOptions(optionKey){  //call with value name in quotes, e.g., getopti
       });
 
       //give bars in-bar labels
+      var inBarLabelHeight = getOptions("inBarLabelHeight");
+      function getBarLabelHeight() {
+        if (inBarLabelHeight === 1){
+          if (barHeight < 90){
+            return "top: -20px";
+          } else {
+            return "top: 5px";
+          }
+        } else if (barHeight >= 10){
+          if (inBarLabelHeight === 2){
+            return "top: 5px";
+          } else if (inBarLabelHeight === 3) {
+            if (barHeight > 50){
+              return "top: 45%";
+            } else {
+              return "top: 40%";
+            }
+          } else if (inBarLabelHeight === 4) {
+            return "top: 100%";
+          }
+        } else {
+          return "top: -20px";
+        }
+      }
+
       var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
+      var inBarLabelHeight = getBarLabelHeight();
+      inBarLabel.attr({
+        "style": inBarLabelHeight,
+      });
       inBarLabel.appendTo(bar);
 
       //append bars
@@ -93,19 +120,28 @@ function getOptions(optionKey){  //call with value name in quotes, e.g., getopti
 
       //x-axis labels
       var xClassName = "values-label-" + num;
-      var xStyle = getStyle();
+      var xStyle = getXStyle();
 
-      function getStyle(){
+      //alternate colours of x-axis labels to match their bars
+      function getXStyle(){
+        if (i % 2 === 0){
+          var barColor = getOptions("odd");
+        } else {
+          var barColor = getOptions("even");
+        }
         if (getOptions("xStyle") === 1){
-          return "border: 2px solid #1a77ff";
-          // "border: 2px solid #e2638e"
+          return "border: 2px solid; border-color: " + barColor;
+        } else if (getOptions("xStyle") === 2){
+          return "background-color: " + barColor;
+        } else if (getOptions("xStyle") === 3){
+          return "color: " + barColor;
         }
       }
-
+      //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
         "class": xClassName,
-        "style": "border-radius: " + barRadius + "px; " + xStyle,
-      }).text(Object.values(data[i])[0]); //I need to alternate styles here, but it's being generated in a loop, so I can either do it again after the loop, or figure out a way to alternate colours within the loop
+        "style": "padding: 5px 0; border-radius: " + barRadius + "px; " + xStyle,
+      }).text(Object.values(data[i])[0]);
       xBarLabel.appendTo("#values");
     }
   }
@@ -124,8 +160,18 @@ function getOptions(optionKey){  //call with value name in quotes, e.g., getopti
 
 // generate and fill y-axis and labels
   var yAxisTicks = getOptions("yAxisTicks");
+  var topValue = Math.ceil(getTopAmount()/100) * 100;
+
+  function getTopAmount(){
+    var amountArray = [];
+    for (var i = 0; i < data.length; i++){
+      amountArray.push(Object.values(data[i])[1]);
+      amountArray.sort().reverse();
+    }
+    return amountArray[0];
+  }
+
   function generateYAxis(){
-    var topValue = yAxisTicks * yAxisTicks; //add more calculations to round uneven numbers to next natural point
     var numHeight = 300 / yAxisTicks;
     var numPadding = numHeight - 18;
     var numBottom = Math.round(numHeight * 97/100);

@@ -84,9 +84,6 @@ h1 {
 
 [class*="bar-"] > span {
   position: relative;
-  top: -20px; /* floating above */
-  /*top: 50%;  midway down */
-  /*top: 100%;*/
 }
 
 [class*="bar-"]:nth-child(odd) {
@@ -100,6 +97,8 @@ h1 {
 #xBox {
   text-align: center;
   position: relative;
+  /*width: 600px;*/
+  /*left: 94px;*/
   /*top: 20px;*/
 }
 
@@ -115,16 +114,4 @@ h1 {
   text-align: center;
   position: relative;
   top: 20px;
-}
-
-[class*="values-label"]:nth-child(odd){
-  border: 2px solid #1a77ff; /* USER VARIABLE */
-  border-radius: 3px; /* USER VARIABLE */
-  padding: 3px 0;
-}
-
-[class*="values-label"]:nth-child(even){
-  border: 2px solid #e2638e; /* USER VARIABLE */
-  border-radius: 3px; /* USER VARIABLE */
-  padding: 3px 0;
 }
