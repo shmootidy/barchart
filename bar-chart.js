@@ -1,36 +1,49 @@
 $(function(){
-  var data = [1, 2, 3, 4, 5];
+  var data = [
+    {item: "dog",
+     amount: 49},
+    {item: "cat",
+     amount: 87},
+    {item: "platypus",
+     amount: 4},
+    {item: "donkey",
+     amount: 19},
+    {item: "porcupine",
+     amount: 72}
+  ];
   var options = {
     gaps: 5,
+    inBarLabelHeight: top; // or above, middle, bottom; variable for different heights of bars
   };
   var element;
 
-// var chartHeight = 250;
-// chartDimensions();
-// function chartDimensions(){
-//   $("#chart").attr("style", "height: " + chartHeight);
-// }
-  // function styleChartContainer(){
-  //   $(".chart-container").attr({
-  //     "grid-column-gaps": 5 + "px",
-  //   })
-  // }
-
-//generate and style bars
+//generate and style bars and x-axis labels
   var numOfBars = data.length; // 5
   var num = 0;
 
   function generateBars(){
     for (var i = 0; i < numOfBars; i++){
-        var randomNum = Math.floor(Math.random() * 100); //TO BY REPLACED BY USER INPUT
-
-      //create <div>s
       num = num + 1;
-      var className = "bar-" + num;
+      var barHeight = Object.values(data[i])[1];
+      var barHeightInv = 100 - barHeight;
+
+      //create bars
+      var barClassName = "bar-" + num;
+      var bar = $("<div></div>").attr({
+        "class": barClassName,
+        "style": "grid-row-start: " + barHeightInv,
+      });
+
+      //in-bar label
+      var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
+      inBarLabel.appendTo(bar);
+      bar.appendTo(".bars");
+
+      var xClassName = "values-label-" + num;
+      var xBarLabel = Object.values(data[i])[0];
       $("<div></div>").attr({
-        "class": className,
-        "style": "grid-row-start: " + randomNum,
-      }).appendTo(".chart-container");
+        "class": xClassName,
+      }).text(xBarLabel).appendTo("#values");
     }
   }
   generateBars();
@@ -43,22 +56,23 @@ $(function(){
   fillTitle();
 
 // generate and fill y-axis and label
-  var yAxisTicks = 10;
-  var yAxisLabel = "Y-Axis Label";
-  $("#chart #y-axis li span").append(yAxisLabel);
+  var yAxisTicks = 10; // USER VARIABLE
+  var yAxisTitle = "Y-Axis Title";
+  $("#chart #y-axis li span").append(yAxisTitle);
+
   function generateYAxis(){
     var topValue = 100;
     for (var i = 0; i < yAxisTicks; i++){
-      $("#numbers").append("<li><span>" + topValue + "%</li></span>");
+      $("#numbers").append("<div class='numbers'>" + topValue + "%</div>");
       topValue = topValue - 10;
     }
-    $("#numbers").append("<li><span></li></span>");
   }
   generateYAxis();
 
 //fill x-axis label
-  var xAxisLabel = "X-Axis Label";
-  $("#chart #x-axis span").append(xAxisLabel);
+  var xAxisTitle = "X-Axis Title";
+  $("#chart #x-axis span").append(xAxisTitle);
+
 
 //aiming to fit everything in here
   makeBarChart(data, options, element);

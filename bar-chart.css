@@ -35,46 +35,31 @@ h1 {
   white-space: nowrap;
 }
 
-#numbers {
+
+#yBox {
   height: 100%;
-  width: 50px;
+  width: 50px; /* this needs to adjust to the size of the label, and lots of other components will need to move too */
   margin: 0;
   padding: 0;
   display: inline-block;
   float: left;
 }
 
-#numbers li {
+#numbers {
+ display: grid;
+ grid-template-columns: 100%; /* is affected by width above */
+}
+
+.numbers {
   text-align: right;
   padding-right: 1em;
-  list-style: none;
-  height: 30px; /* 29px + 1px (border) = 30px */
+  padding-top: 12px;
   position: relative;
   bottom: 29px; /* lift up the whole list to make room for the last one */
   border-bottom: 1px solid #444; /* see below for alternating visible lines */
 }
 
-/*#chart #numbers li:nth-child(even) {
-  border-bottom: 1px solid transparent;
-}
-
-#chart #numbers li:nth-child(odd) {
-  border-bottom: 1px solid #444;
-}
-*/
-#numbers li:last-child {
-  height: 30px;
-  border-bottom: 1px solid transparent;
-}
-
-#numbers li span {
-  color: #eee;
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-}
-
-#bars {
+#barsBox {
   height: 100%;
   width: 600px;
   display: inline-block;
@@ -84,12 +69,45 @@ h1 {
   border: 1px #444 solid;
 }
 
-#boop {
-  text-align: center;
-  position: relative;
+.bars {
+  display: grid;
+  grid-template-rows: repeat(100, 1fr);
+  grid-column-gap: 10px;
+  height: 100%;
+  width: 100%;
+  padding: 5px 10px 0 10px;
 }
 
-#beep {
+[class*="bar-"] {
+  margin: 0;
+  padding: 0;
+  border-radius: 3px 3px 0 0;
+  grid-row-end: 102;
+  text-align: center;
+}
+
+[class*="bar-"] > span {
+  position: relative;
+  top: -20px; /* floating above */
+  top: 50%; /* midway down */
+  top: 100%;
+}
+
+[class*="bar-"]:nth-child(odd) {
+ background-color: #1a77ff;
+}
+
+[class*="bar-"]:nth-child(even) {
+ background-color: #e2638e;
+}
+
+#xBox {
+  text-align: center;
+  position: relative;
+  /*top: 20px;*/
+}
+
+#values {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 5px;
@@ -102,28 +120,10 @@ h1 {
   top: 20px;
 }
 
-.chart-container {
-  display: grid;
-  /*grid-template-columns: repeat(5, 1fr); by not specifying, it is created automatically based on number of child divs*/
-  grid-template-rows: repeat(100, 1fr);
-  grid-column-gap: 5px;
-  height: 100%;
-  width: 100%;
-  padding: 5px 10px 0 10px;
+[class*="values-label"]:nth-child(odd){
+ border: 2px solid #1a77ff;
 }
 
-[class*="bar-"] {
-  margin: 0;
-  padding: 0;
-  border-radius: 5px 5px 0 0;
-  grid-row-end: 102;
+[class*="values-label"]:nth-child(even){
+ border: 2px solid #e2638e;
 }
-
-[class*="bar"]:nth-child(odd) {
- background-color: #ff4136;
-}
-
-[class*="bar"]:nth-child(even) {
- background-color: #0074d9;
-}
-
