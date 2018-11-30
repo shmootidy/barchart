@@ -191,7 +191,7 @@ function getOptions(optionKey){
     var num = topValue;
     for (var i = 0; i < yAxisTicks; i++){
       $("<div class='numbers'>" + num + "</div>").appendTo("#numbers");
-      num = num - Math.pow(10, (topAmountIntegers - 1));
+      num = num - (Math.pow(10, (topAmountIntegers - 1)) * (10 / yAxisTicks));
     }
   }
   generateYAxis();
