@@ -124,7 +124,9 @@ h1 {
 #values {
   display: grid;
   grid-column-gap: 9px;
-  padding: 10px 10px 0 94px;
+  width: 600px;
+  padding: 10px;
+  margin-left: 66px;
 }
 
 #x-axis {

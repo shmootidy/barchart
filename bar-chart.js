@@ -1,15 +1,15 @@
 $(function(){
   var data = [
     {item: "dog",
-     amount: 49},
+     amount: 419},
     {item: "cat",
-     amount: 97},
+     amount: 87},
     {item: "platypus",
      amount: 34},
     {item: "donkey",
      amount: 76},
     {item: "porcupine",
-     amount: 0},
+     amount: 9},
     {item: "goat",
      amount: 36}
   ];
@@ -29,7 +29,7 @@ $(function(){
         odd: "#1a77ff",
         even: "#e2638e",
       },
-      inBarLabelHeight: 3, // four options: hover, top, middle, bottom
+      inBarLabelHeight: 2, // four options: hover, top, middle, bottom
       barRadius: 1,
     },
     xAxis: {
@@ -106,7 +106,7 @@ function getOptions(optionKey){
               return "top: 30%";
             }
           } else if (inBarLabelHeight === 4) {
-            return "top: calc(100% - 20px";
+            return "top: calc(100% - 20px)";
           }
         } else {
           return "top: -20px";
@@ -167,25 +167,28 @@ function getOptions(optionKey){
 
 // generate and fill y-axis and labels
   var yAxisTicks = getOptions("yAxisTicks");
-  var topValue = Math.ceil(getTopAmount()/100) * 100;
+  var topAmountIntegers = getTopAmount().toString().length;
+  console.log(topAmountIntegers);
+  var topValue = Math.ceil(getTopAmount()/Math.pow(10, topAmountIntegers)) * Math.pow(10, topAmountIntegers);
 
   function getTopAmount(){
     var amountArray = [];
     for (var i = 0; i < data.length; i++){
       amountArray.push(Object.values(data[i])[1]);
-      amountArray.sort().reverse();
+      amountArray.sort((a, b) => b - a); // got this from SO.com, don't understand how it works
     }
-    return amountArray[0];
+    var topAmount = amountArray[0];
+    return topAmount;
   }
 
   function generateYAxis(){
     $("#numbers").attr({
       "style": "grid-template-rows: repeat(" + yAxisTicks + ", 1fr)",
     });
-    var num = yAxisTicks;
+    var num = topValue;
     for (var i = 0; i < yAxisTicks; i++){
       $("<div class='numbers'>" + num + "</div>").appendTo("#numbers");
-      num--;
+      num = num - Math.pow(10, (topAmountIntegers -1));
     }
   }
   generateYAxis();
