@@ -3,15 +3,15 @@ $(function(){
     {item: "dog",
      amount: 419},
     {item: "cat",
-     amount: 87},
+     amount: 876},
     {item: "platypus",
-     amount: 34},
+     amount: 134},
     {item: "donkey",
-     amount: 76},
+     amount: 726},
     {item: "porcupine",
-     amount: 9},
+     amount: 29},
     {item: "goat",
-     amount: 36}
+     amount: 316}
   ];
   var options = {
     chart: {
@@ -42,6 +42,9 @@ $(function(){
     }
   };
   var element;
+
+  var topAmountIntegers = getTopAmount().toString().length;
+
 
 //crawl through options to return desired value
 function getOptions(optionKey){
@@ -75,7 +78,9 @@ function getOptions(optionKey){
     for (var i = 0; i < data.length; i++){
       num = num + 1;
       var barHeight = Object.values(data[i])[1];
-      var barHeightInverse = 100 - barHeight;
+      var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
+      var barHeightInverse = 100 - barHeightAsPercent;
+      console.log(barHeightInverse);
 
       //create bars and give height
       var barRadius = getOptions("barRadius");
@@ -89,18 +94,18 @@ function getOptions(optionKey){
       var inBarLabelHeight = getOptions("inBarLabelHeight");
       function getBarLabelHeight() {
         if (inBarLabelHeight === 1){
-          if (barHeight < 90){
+          if (barHeightAsPercent < 90){
             return "top: -20px";
           } else {
             return "top: 5px";
           }
-        } else if (barHeight >= 10){
+        } else if (barHeightAsPercent >= 10){
           if (inBarLabelHeight === 2){
             return "top: 5px";
           } else if (inBarLabelHeight === 3) {
-            if (barHeight > 50){
+            if (barHeightAsPercent > 50){
               return "top: 45%";
-            } else if (barHeight > 15){
+            } else if (barHeightAsPercent > 15){
               return "top: 40%";
             } else {
               return "top: 30%";
@@ -113,7 +118,7 @@ function getOptions(optionKey){
         }
       }
 
-      var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]); //force size of text with padding
+      var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
       var inBarLabelHeight = getBarLabelHeight();
       inBarLabel.attr({
         "style": inBarLabelHeight,
@@ -167,8 +172,6 @@ function getOptions(optionKey){
 
 // generate and fill y-axis and labels
   var yAxisTicks = getOptions("yAxisTicks");
-  var topAmountIntegers = getTopAmount().toString().length;
-  console.log(topAmountIntegers);
   var topValue = Math.ceil(getTopAmount()/Math.pow(10, topAmountIntegers)) * Math.pow(10, topAmountIntegers);
 
   function getTopAmount(){
@@ -188,7 +191,7 @@ function getOptions(optionKey){
     var num = topValue;
     for (var i = 0; i < yAxisTicks; i++){
       $("<div class='numbers'>" + num + "</div>").appendTo("#numbers");
-      num = num - Math.pow(10, (topAmountIntegers -1));
+      num = num - Math.pow(10, (topAmountIntegers - 1));
     }
   }
   generateYAxis();
