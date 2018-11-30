@@ -5,13 +5,13 @@ $(function(){
     {item: "cat",
      amount: 97},
     {item: "platypus",
-     amount: 4},
+     amount: 34},
     {item: "donkey",
-     amount: 19},
+     amount: 76},
     {item: "porcupine",
-     amount: 72},
-    // {item: "goat",
-    //  amount: 36} //still need to figure out how to get the labels to organically match the bars
+     amount: 0},
+    {item: "goat",
+     amount: 36}
   ];
   var options = {
     chart: {
@@ -29,7 +29,7 @@ $(function(){
         odd: "#1a77ff",
         even: "#e2638e",
       },
-      inBarLabelHeight: 4, // four options: hover, top, middle, bottom
+      inBarLabelHeight: 3, // four options: hover, top, middle, bottom
       barRadius: 3,
     },
     xAxis: {
@@ -62,10 +62,13 @@ function getOptions(optionKey){
   var num = 0;
 
   function generateBars(){
-    // bar spacing
+    // bar spacing and size
     var barSpacing = getOptions("barSpacing");
     $(".bars").attr({
-      "style": "grid-column-gap: " + barSpacing + "px",
+      "style": "grid-column-gap: " + barSpacing + "px; grid-template-columns: repeat(" + data.length + ", 1fr)",
+    });
+    $("#values").attr({
+      "style": "grid-template-columns: repeat(" + data.length + ", 1fr)",
     });
 
     //loop through data to create bars
@@ -97,18 +100,20 @@ function getOptions(optionKey){
           } else if (inBarLabelHeight === 3) {
             if (barHeight > 50){
               return "top: 45%";
-            } else {
+            } else if (barHeight > 15){
               return "top: 40%";
+            } else {
+              return "top: 30%";
             }
           } else if (inBarLabelHeight === 4) {
-            return "top: 100%";
+            return "top: calc(100% - 20px";
           }
         } else {
           return "top: -20px";
         }
       }
 
-      var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
+      var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]); //force size of text with padding
       var inBarLabelHeight = getBarLabelHeight();
       inBarLabel.attr({
         "style": inBarLabelHeight,
@@ -141,6 +146,8 @@ function getOptions(optionKey){
       var xBarLabel = $("<div></div>").attr({
         "class": xClassName,
         "style": "padding: 5px 0; border-radius: " + barRadius + "px; " + xStyle,
+
+
       }).text(Object.values(data[i])[0]);
       xBarLabel.appendTo("#values");
     }
