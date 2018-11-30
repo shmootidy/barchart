@@ -30,7 +30,7 @@ $(function(){
         even: "#e2638e",
       },
       inBarLabelHeight: 3, // four options: hover, top, middle, bottom
-      barRadius: 3,
+      barRadius: 1,
     },
     xAxis: {
       xStyle: 1, // 1: outline; 2: background; 3: text color
@@ -179,17 +179,26 @@ function getOptions(optionKey){
   }
 
   function generateYAxis(){
-    var numHeight = 300 / yAxisTicks;
-    var numPadding = numHeight - 18;
-    var numBottom = Math.round(numHeight * 97/100);
+    $("#numbers").attr({
+      "style": "grid-template-rows: repeat(" + yAxisTicks + ", 1fr)",
+    });
+    var num = yAxisTicks;
     for (var i = 0; i < yAxisTicks; i++){
-      $("<div class='numbers'>" + topValue + "</div>").attr({
-        "style": "padding-top: " + numPadding + "px; bottom: " + numBottom + "px",
-      }).appendTo("#numbers");
-      topValue = topValue - yAxisTicks;
+      $("<div class='numbers'>" + num + "</div>").appendTo("#numbers");
+      num--;
     }
   }
   generateYAxis();
+
+  function generateTicks(){
+    $("#ticks").attr({
+      "style": "grid-template-rows: repeat(" + yAxisTicks + ", 1fr)",
+    });
+    for (var i = 0; i < yAxisTicks; i++){
+      $("<div class='ticks'>" + "" + "</div>").appendTo("#ticks");
+    }
+  }
+  generateTicks();
 
 //fill x-axis title
   var xAxisTitle = getOptions("X-Axis Title");

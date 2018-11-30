@@ -7,15 +7,15 @@ body {
   color: #eee;
 }
 
-h1 {
-  color: #eee;
-  text-align: center;
-}
-
 #chart {
   height: 300px; /* HEIGHT OF CHART */
   margin: 30px auto 0;
   display: inline-block;
+}
+
+h1 {
+  color: #eee;
+  text-align: center;
 }
 
 #y-axis {
@@ -35,10 +35,8 @@ h1 {
   white-space: nowrap;
 }
 
-
 #yBox {
   height: 100%;
-  width: 50px; /* this needs to adjust to the size of the label, and lots of other components will need to move too */
   margin: 0;
   padding: 0;
   display: inline-block;
@@ -47,14 +45,38 @@ h1 {
 
 #numbers {
  display: grid;
- grid-template-columns: 100%; /* is affected by width above */
+ height: 100%;
 }
 
 .numbers {
   text-align: right;
-  padding-right: 1em;
   position: relative;
-  border-bottom: 1px solid #444;
+  bottom: 10px; /* bottom and right will likely need to be made VARIABLE */
+  right: 5px; /* they are what moves the y-labels to sit alongside the ticks (rather than under/over) */
+  background-color: #30303A;
+}
+
+#tickBox {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+  background-color: #444;
+}
+
+#ticks {
+ display: grid;
+ height: 100%;
+ grid-row-gap: 1px;
+ padding-top: 1px;
+}
+
+.ticks {
+  text-align: right;
+  padding-right: 1em; /* this gives the ticks a size */
+  position: relative;
+  background-color: #30303A;
 }
 
 #barsBox {
@@ -69,7 +91,6 @@ h1 {
 
 .bars {
   display: grid;
-  /*grid-template-columns: repeat(5, 1fr);  VARIABLE */
   grid-template-rows: repeat(100, 1fr); /* all values must be turned into percentages */
   height: 100%;
   width: 100%;
@@ -98,15 +119,10 @@ h1 {
 #xBox {
   text-align: center;
   position: relative;
-  /*width: 600px;*/
-  /*left: 94px;*/
-  /*top: 20px;*/
 }
 
 #values {
   display: grid;
-  /*grid-template-columns: repeat(5, 1fr);*/
-  /*grid-template-rows: 1fr;*/
   grid-column-gap: 9px;
   padding: 10px 10px 0 94px;
 }
