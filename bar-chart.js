@@ -1,17 +1,17 @@
 $(function(){
   var data = [
     {item: "dog",
-     amount: 419},
+     amount: 19},
     {item: "cat",
-     amount: 876},
+     amount: 76},
     {item: "platypus",
-     amount: 134},
+     amount: 34},
     {item: "donkey",
-     amount: 726},
+     amount: 26},
     {item: "porcupine",
      amount: 29},
     {item: "goat",
-     amount: 316}
+     amount: 31}
   ];
   var options = {
     chart: {
@@ -38,12 +38,13 @@ $(function(){
     yAxis: {
       xAxisTitle: "X-Axis Title",
       yAxisTitle: "Y-Axis Title",
-      yAxisTicks: 10,
+      yAxisTicks: 5,
     }
   };
   var element;
 
   var topAmountIntegers = getTopAmount().toString().length;
+    var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
 
 
 //crawl through options to return desired value
@@ -70,17 +71,27 @@ function getOptions(optionKey){
     $(".bars").attr({
       "style": "grid-column-gap: " + barSpacing + "px; grid-template-columns: repeat(" + data.length + ", 1fr)",
     });
+
+    var n = 27;
+    var marginLeft = 53 + n;
+
     $("#values").attr({
-      "style": "grid-template-columns: repeat(" + data.length + ", 1fr)",
+      "style": "grid-template-columns: repeat(" + data.length + ", 1fr); margin-left: " + marginLeft + "px",
     });
 
     //loop through data to create bars
     for (var i = 0; i < data.length; i++){
       num = num + 1;
       var barHeight = Object.values(data[i])[1];
-      var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
-      var barHeightInverse = 100 - barHeightAsPercent;
-      console.log(barHeightInverse);
+
+      function getBarHeightAsPercent(){
+        var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
+        if (chartZoomCheck() == 2){
+          barHeightAsPercent = barHeightAsPercent * 2;
+        }
+        return barHeightAsPercent;
+      }
+      var barHeightInverse = 100 - getBarHeightAsPercent();
 
       //create bars and give height
       var barRadius = getOptions("barRadius");
@@ -94,18 +105,18 @@ function getOptions(optionKey){
       var inBarLabelHeight = getOptions("inBarLabelHeight");
       function getBarLabelHeight() {
         if (inBarLabelHeight === 1){
-          if (barHeightAsPercent < 90){
+          if (getBarHeightAsPercent() < 90){
             return "top: -20px";
           } else {
             return "top: 5px";
           }
-        } else if (barHeightAsPercent >= 10){
+        } else if (getBarHeightAsPercent() >= 10){
           if (inBarLabelHeight === 2){
             return "top: 5px";
           } else if (inBarLabelHeight === 3) {
-            if (barHeightAsPercent > 50){
+            if (getBarHeightAsPercent() > 50){
               return "top: 45%";
-            } else if (barHeightAsPercent > 15){
+            } else if (getBarHeightAsPercent() > 15){
               return "top: 40%";
             } else {
               return "top: 30%";
@@ -172,7 +183,14 @@ function getOptions(optionKey){
 
 // generate and fill y-axis and labels
   var yAxisTicks = getOptions("yAxisTicks");
-  var topValue = Math.ceil(getTopAmount()/Math.pow(10, topAmountIntegers)) * Math.pow(10, topAmountIntegers);
+
+  function getTopValue(){
+    var topValue = Math.ceil(getTopAmount()/Math.pow(10, topAmountIntegers)) * Math.pow(10, topAmountIntegers);
+    if (Math.round(topTest) == 0){
+      topValue = topValue / 2;
+    }
+    return topValue;
+  }
 
   function getTopAmount(){
     var amountArray = [];
@@ -188,13 +206,21 @@ function getOptions(optionKey){
     $("#numbers").attr({
       "style": "grid-template-rows: repeat(" + yAxisTicks + ", 1fr)",
     });
-    var num = topValue;
+    var num = getTopValue();
     for (var i = 0; i < yAxisTicks; i++){
       $("<div class='numbers'>" + num + "</div>").appendTo("#numbers");
-      num = num - (Math.pow(10, (topAmountIntegers - 1)) * (10 / yAxisTicks));
+      num = num - (Math.pow(10, (topAmountIntegers - 1)) * (10 / yAxisTicks)) / chartZoomCheck();
     }
   }
   generateYAxis();
+
+  function chartZoomCheck(){
+    var chartZoom = 1;
+    if (Math.round(topTest) == 0){
+      chartZoom = 2;
+    }
+    return chartZoom;
+  }
 
   function generateTicks(){
     $("#ticks").attr({

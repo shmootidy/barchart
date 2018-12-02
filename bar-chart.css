@@ -51,7 +51,7 @@ h1 {
 .numbers {
   text-align: right;
   position: relative;
-  bottom: 10px; /* bottom and right will likely need to be made VARIABLE */
+  bottom: 8px; /* bottom and right will likely need to be made VARIABLE */
   right: 5px; /* they are what moves the y-labels to sit alongside the ticks (rather than under/over) */
   background-color: #30303A;
 }
@@ -126,11 +126,11 @@ h1 {
   grid-column-gap: 9px;
   width: 600px;
   padding: 10px;
-  margin-left: 66px;
+  /*margin-left: 84px;  VARIABLE - this is a real thorn in my side */
 }
 
 #x-axis {
   text-align: center;
   position: relative;
-  top: 20px;
+  top: 5px;
 }
