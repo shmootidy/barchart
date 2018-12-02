@@ -1,25 +1,25 @@
 $(function(){
   var data = [
-    {item: "dog",
+    {item: "a",
      amount: 0},
-    {item: "cat",
+    {item: "b",
      amount: 46},
-    {item: "platdfdfdypus",
+    {item: "c",
      amount: 34},
-    {item: "12345678901",
+    {item: "d",
      amount: 26},
-    {item: "ABCDEFGHIJ",
+    {item: "e",
      amount: 29},
-    {item: "goat",
+    {item: "f",
      amount: 31},
   ];
   var options = {
     chart: {
-      chartWidth: 600,
-      chartHeight: 300,
+      chartWidth: 800,
+      chartHeight: 200,
       chartTitle: {
         title: "My Bar Chart",
-        fontSize: 24,
+        fontSize: 36,
         fontColor: "red",
       },
     },
@@ -61,10 +61,14 @@ function getOptions(optionKey){
   }
   return optionKey;
 }
+//set barsBox dimensions
+var chartHeight = getOptions("chartHeight");
+var chartWidth = getOptions("chartWidth");
+$("#barsBox").attr({
+  "style": "height: " + chartHeight + "px; width: " + chartWidth + "px",
+});
 
 //generate and style bars and x-axis labels
-  // var num = 0;
-
   function generateBars(){
     // bar spacing and size
     var barSpacing = getOptions("barSpacing");
@@ -77,7 +81,8 @@ function getOptions(optionKey){
     $("#values").attr({
       "style": "grid-template-columns: repeat(" + data.length + ", 1fr); "+
       "grid-column-gap: " + barSpacing + "px; "+
-      "padding: 2px " + (barSpacing + 1) + "px",
+      "padding: 2px " + (barSpacing + 1) + "px; "+
+      "width: " + chartWidth + "px",
     });
 
     //loop through data to create bars
@@ -169,10 +174,11 @@ function getOptions(optionKey){
   }
   generateBars();
 
-// fill the chart title with custom text
+// fill the chart title with custom text of a custom size
   function fillTitle(){
     var title = getOptions("title");
-    $("h1").append(title);
+    var fontSize = getOptions("fontSize");
+    $("h1").attr({"style": "font-size: " + fontSize + "px"}).append(title);
   }
   fillTitle();
 
