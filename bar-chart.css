@@ -3,7 +3,7 @@
 body {
   background: #30303A;
   font-family: Verdana, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: #eee;
 }
 
@@ -24,16 +24,18 @@ h1 {
   grid-area: title;
 }
 
+#y-title{
+  position: relative;
+  top: 200px; /* VARIABLE ... maybe ... */
+  left: 5%;
+}
+
 #y-axis {
   height: 100%;
   width: 1em;
   margin: 0 20px 0 0;
-  position: relative;
-  left: 22%;
   grid-area: y;
-  top: 25%;
   text-align: center;
-  white-space: nowrap;
   white-space: nowrap;
 }
 

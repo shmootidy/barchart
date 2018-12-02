@@ -1,7 +1,7 @@
 $(function(){
   var data = [
     {item: "dog",
-     amount: 19},
+     amount: 1},
     {item: "cat",
      amount: 76},
     {item: "platypus",
@@ -38,7 +38,7 @@ $(function(){
     yAxis: {
       xAxisTitle: "X-Axis Title",
       yAxisTitle: "Y-Axis Title",
-      yAxisTicks: 5,
+      yAxisTicks: 20,
     }
   };
   var element;
@@ -72,11 +72,8 @@ function getOptions(optionKey){
       "style": "grid-column-gap: " + barSpacing + "px; grid-template-columns: repeat(" + data.length + ", 1fr)",
     });
 
-    var n = 27;
-    var marginLeft = 53 + n;
-
     $("#values").attr({
-      "style": "grid-template-columns: repeat(" + data.length + ", 1fr); margin-left: " + marginLeft + "px",
+      "style": "grid-template-columns: repeat(" + data.length + ", 1fr)",
     });
 
     //loop through data to create bars
@@ -179,7 +176,9 @@ function getOptions(optionKey){
 
 // fill y-axis title
   var yAxisTitle = "Y-Axis Title";
-  $("#chart #y-axis li span").append(yAxisTitle);
+  $("<div id='y-axis'>" + yAxisTitle + "</div>").attr({
+"style" : "transform: rotate(270deg)",
+}).prependTo($("#y-title"));
 
 // generate and fill y-axis and labels
   var yAxisTicks = getOptions("yAxisTicks");
