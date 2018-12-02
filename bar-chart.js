@@ -44,7 +44,7 @@ $(function(){
   var element;
 
   var topAmountIntegers = getTopAmount().toString().length;
-    var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
+  var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
 
 
 //crawl through options to return desired value
