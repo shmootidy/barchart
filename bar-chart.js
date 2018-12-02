@@ -1,17 +1,17 @@
 $(function(){
   var data = [
     {item: "dog",
-     amount: 1},
+     amount: 0},
     {item: "cat",
-     amount: 76},
-    {item: "platypus",
+     amount: 46},
+    {item: "platdfdfdypus",
      amount: 34},
-    {item: "donkey",
+    {item: "12345678901",
      amount: 26},
-    {item: "porcupine",
+    {item: "ABCDEFGHIJ",
      amount: 29},
     {item: "goat",
-     amount: 31}
+     amount: 31},
   ];
   var options = {
     chart: {
@@ -29,16 +29,16 @@ $(function(){
         odd: "#1a77ff",
         even: "#e2638e",
       },
-      inBarLabelHeight: 2, // four options: hover, top, middle, bottom
-      barRadius: 1,
+      inBarLabelHeight: 1, // four options: 1 - hover; 2 - top; 3- middle; 4 - bottom
+      barRadius: 5,
     },
     xAxis: {
-      xStyle: 1, // 1: outline; 2: background; 3: text color
+      xStyle: 1, // three options: 1 - outline; 2 - background; 3 - text color
     },
     yAxis: {
       xAxisTitle: "X-Axis Title",
       yAxisTitle: "Y-Axis Title",
-      yAxisTicks: 20,
+      yAxisTicks: 2, //two option: 1 - 10 ticks; 2 - 5 ticks
     }
   };
   var element;
@@ -63,22 +63,26 @@ function getOptions(optionKey){
 }
 
 //generate and style bars and x-axis labels
-  var num = 0;
+  // var num = 0;
 
   function generateBars(){
     // bar spacing and size
     var barSpacing = getOptions("barSpacing");
     $(".bars").attr({
-      "style": "grid-column-gap: " + barSpacing + "px; grid-template-columns: repeat(" + data.length + ", 1fr)",
+      "style": "grid-column-gap: " + barSpacing + "px; "+
+      "grid-template-columns: repeat(" + data.length + ", 1fr); " +
+      "padding: 5px " + barSpacing + "px 0 " + barSpacing + "px", //not sure if the top (5px) should stay
     });
 
     $("#values").attr({
-      "style": "grid-template-columns: repeat(" + data.length + ", 1fr)",
+      "style": "grid-template-columns: repeat(" + data.length + ", 1fr); "+
+      "grid-column-gap: " + barSpacing + "px; "+
+      "padding: 2px " + (barSpacing + 1) + "px",
     });
 
     //loop through data to create bars
     for (var i = 0; i < data.length; i++){
-      num = num + 1;
+      // num = num + 1;
       var barHeight = Object.values(data[i])[1];
 
       function getBarHeightAsPercent(){
@@ -92,7 +96,7 @@ function getOptions(optionKey){
 
       //create bars and give height
       var barRadius = getOptions("barRadius");
-      var barClassName = "bar-" + num;
+      var barClassName = "bar-";// + num;
       var bar = $("<div></div>").attr({
         "class": barClassName,
         "style": "grid-row-start: " + barHeightInverse + "; border-radius: " + barRadius + "px " + barRadius + "px 0 0",
@@ -137,7 +141,7 @@ function getOptions(optionKey){
       bar.appendTo(".bars");
 
       //x-axis labels
-      var xClassName = "values-label-" + num;
+      var xClassName = "values-label-";// + num;
       var xStyle = getXStyle();
 
       //alternate colours of x-axis labels to match their bars
@@ -158,9 +162,7 @@ function getOptions(optionKey){
       //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
         "class": xClassName,
-        "style": "padding: 5px 0; border-radius: " + barRadius + "px; " + xStyle,
-
-
+        "style": "padding: 5px 0; border-radius: 0 0 " + barRadius + "px " + barRadius + "px; " + xStyle,
       }).text(Object.values(data[i])[0]);
       xBarLabel.appendTo("#values");
     }
@@ -181,7 +183,15 @@ function getOptions(optionKey){
 }).prependTo($("#y-title"));
 
 // generate and fill y-axis and labels
-  var yAxisTicks = getOptions("yAxisTicks");
+  var yAxisTicks = getYAxisTicks();
+  function getYAxisTicks(){
+     if (getOptions("yAxisTicks") === 1){
+      yAxisTicks = 10;
+     } else if (getOptions("yAxisTicks") === 2) {
+      yAxisTicks = 5;
+     }
+     return yAxisTicks;
+  }
 
   function getTopValue(){
     var topValue = Math.ceil(getTopAmount()/Math.pow(10, topAmountIntegers)) * Math.pow(10, topAmountIntegers);
