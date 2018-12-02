@@ -20,7 +20,7 @@ $(function(){
       chartTitle: {
         title: "My Bar Chart",
         fontSize: 36,
-        fontColor: "red",
+        fontColor: "#eee",
       },
     },
     bars: {
@@ -87,7 +87,6 @@ $("#barsBox").attr({
 
     //loop through data to create bars
     for (var i = 0; i < data.length; i++){
-      // num = num + 1;
       var barHeight = Object.values(data[i])[1];
 
       function getBarHeightAsPercent(){
@@ -101,7 +100,7 @@ $("#barsBox").attr({
 
       //create bars and give height
       var barRadius = getOptions("barRadius");
-      var barClassName = "bar-";// + num;
+      var barClassName = "bar-";
       var bar = $("<div></div>").attr({
         "class": barClassName,
         "style": "grid-row-start: " + barHeightInverse + "; border-radius: " + barRadius + "px " + barRadius + "px 0 0",
@@ -146,7 +145,7 @@ $("#barsBox").attr({
       bar.appendTo(".bars");
 
       //x-axis labels
-      var xClassName = "values-label-";// + num;
+      var xClassName = "values-label-";
       var xStyle = getXStyle();
 
       //alternate colours of x-axis labels to match their bars
@@ -174,11 +173,13 @@ $("#barsBox").attr({
   }
   generateBars();
 
-// fill the chart title with custom text of a custom size
+// fill the chart title with custom text of a custom size and custom colour
   function fillTitle(){
     var title = getOptions("title");
     var fontSize = getOptions("fontSize");
-    $("h1").attr({"style": "font-size: " + fontSize + "px"}).append(title);
+    var fontColor = getOptions("fontColor");
+    $("h1").attr({"style": "font-size: " + fontSize + "px; "+
+      "color: " + fontColor}).append(title);
   }
   fillTitle();
 
