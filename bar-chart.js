@@ -15,7 +15,7 @@ $(function(){
   ];
   var options = {
     chart: {
-      chartWidth: 800,
+      chartWidth: 600,
       chartHeight: 200,
       chartTitle: {
         title: "My Bar Chart",
@@ -183,9 +183,9 @@ $("#barsBox").attr({
   fillTitle();
 
 // fill y-axis title
-  var yAxisTitle = "Y-Axis Title";
+  var yAxisTitle = getOptions("yAxisTitle");
   $("<div id='y-axis'>" + yAxisTitle + "</div>").attr({
-"style" : "transform: rotate(270deg)",
+// "style" : "transform: rotate(270deg)",
 }).prependTo($("#y-title"));
 
 // generate and fill y-axis and labels
