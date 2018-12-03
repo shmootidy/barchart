@@ -1,8 +1,9 @@
+/*globals $:false */
 $(function(){
   var data = [
     {item: "a",
      amount: 0},
-    {item: "bjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjh",
+    {item: "b",
      amount: 46},
     {item: "c",
      amount: 34},
@@ -89,13 +90,7 @@ $("#barsBox").attr({
     for (var i = 0; i < data.length; i++){
       var barHeight = Object.values(data[i])[1];
 
-      function getBarHeightAsPercent(){
-        var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
-        if (chartZoomCheck() == 2){
-          barHeightAsPercent = barHeightAsPercent * 2;
-        }
-        return barHeightAsPercent;
-      }
+
       var barHeightInverse = 100 - getBarHeightAsPercent();
 
       //create bars and give height
@@ -107,8 +102,9 @@ $("#barsBox").attr({
       });
 
       //give bars in-bar labels
-      var inBarLabelHeight = getOptions("inBarLabelHeight");
+      var inBarLabelHeight;
       function getBarLabelHeight() {
+        inBarLabelHeight = getOptions("inBarLabelHeight");
         if (inBarLabelHeight === 1){
           if (getBarHeightAsPercent() < 90){
             return "top: -20px";
@@ -133,9 +129,15 @@ $("#barsBox").attr({
           return "top: -20px";
         }
       }
-
+      function getBarHeightAsPercent(){
+        var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
+        if (chartZoomCheck() == 2){
+          barHeightAsPercent = barHeightAsPercent * 2;
+        }
+        return barHeightAsPercent;
+      }
       var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
-      var inBarLabelHeight = getBarLabelHeight();
+      inBarLabelHeight = getBarLabelHeight();
       inBarLabel.attr({
         "style": inBarLabelHeight,
       });
@@ -150,10 +152,11 @@ $("#barsBox").attr({
 
       //alternate colours of x-axis labels to match their bars
       function getXStyle(){
+        var barColor;
         if (i % 2 === 0){
-          var barColor = getOptions("odd");
+           barColor = getOptions("odd");
         } else {
-          var barColor = getOptions("even");
+           barColor = getOptions("even");
         }
         if (getOptions("xStyle") === 1){
           return "border: 2px solid; border-color: " + barColor;
@@ -212,10 +215,13 @@ $("#barsBox").attr({
     var amountArray = [];
     for (var i = 0; i < data.length; i++){
       amountArray.push(Object.values(data[i])[1]);
-      amountArray.sort((a, b) => b - a); // got this from SO.com, don't understand how it works
+      amountArray.sort(switcheroo()); // got this from SO.com, don't understand how it works
     }
     var topAmount = amountArray[0];
     return topAmount;
+  }
+  function switcheroo(a, b){
+    b-a;
   }
 
   function generateYAxis(){
