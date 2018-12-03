@@ -10,7 +10,7 @@ $(function(){
     {item: "d",
      amount: 26},
     {item: "e",
-     amount: 29},
+     amount: 9},
     {item: "f",
      amount: 31},
   ];
@@ -43,31 +43,30 @@ $(function(){
     }
   };
   var element;
+// ***** END OF USER INPUT *****
 
   var topAmountIntegers = getTopAmount().toString().length;
   var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
-
-
 //crawl through options to return desired value
-function getOptions(optionKey){
-  $.each(options, crawler);
-  function crawler(key, value){
-    if (optionKey == key){
-      optionKey = value;
-      return optionKey;
+  function getOptions(optionKey){
+    $.each(options, crawler);
+    function crawler(key, value){
+      if (optionKey == key){
+        optionKey = value;
+        return optionKey;
+      }
+      if (value !== null && typeof value === "object"){
+        $.each(value, crawler);
+      }
     }
-    if (value !== null && typeof value === "object"){
-      $.each(value, crawler);
-    }
+    return optionKey;
   }
-  return optionKey;
-}
 //set barsBox dimensions
-var chartHeight = getOptions("chartHeight");
-var chartWidth = getOptions("chartWidth");
-$("#barsBox").attr({
-  "style": "height: " + chartHeight + "px; width: " + chartWidth + "px",
-});
+  var chartHeight = getOptions("chartHeight");
+  var chartWidth = getOptions("chartWidth");
+  $("#barsBox").attr({
+    "style": "height: " + chartHeight + "px; width: " + chartWidth + "px",
+  });
 
 //generate and style bars and x-axis labels
   function generateBars(){
@@ -102,9 +101,8 @@ $("#barsBox").attr({
       });
 
       //give bars in-bar labels
-      var inBarLabelHeight;
+      var inBarLabelHeight = getOptions("inBarLabelHeight");
       function getBarLabelHeight() {
-        inBarLabelHeight = getOptions("inBarLabelHeight");
         if (inBarLabelHeight === 1){
           if (getBarHeightAsPercent() < 90){
             return "top: -20px";
@@ -215,13 +213,10 @@ $("#barsBox").attr({
     var amountArray = [];
     for (var i = 0; i < data.length; i++){
       amountArray.push(Object.values(data[i])[1]);
-      amountArray.sort(switcheroo()); // got this from SO.com, don't understand how it works
+      amountArray.sort((a, b) => b - a); // got this from SO.com, don't understand how it works
     }
     var topAmount = amountArray[0];
     return topAmount;
-  }
-  function switcheroo(a, b){
-    b-a;
   }
 
   function generateYAxis(){
@@ -263,7 +258,7 @@ $("#barsBox").attr({
   makeBarChart(data, options, element);
   function makeBarChart(data, options, element){
 
-  };
+  }
 
 });
 
