@@ -110,9 +110,14 @@ h1 {
   display: grid;
 }
 
-.values-label- {
+.x-label {
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.x-label:hover {
+  position: relative;
+  overflow: visible;
 }
 
 #x-axis {

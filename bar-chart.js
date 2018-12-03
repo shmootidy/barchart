@@ -7,7 +7,7 @@ $(function(){
      amount: 46},
     {item: "c",
      amount: 34},
-    {item: "d",
+    {item: "dadfasdfasdfasdfasdffasd",
      amount: 26},
     {item: "e",
      amount: 9},
@@ -77,7 +77,8 @@ $(function(){
       "grid-template-columns: repeat(" + data.length + ", 1fr); " +
       "padding: 5px " + barSpacing + "px 0 " + barSpacing + "px", //not sure if the top (5px) should stay
     });
-    //x-labels spacing and size;
+
+    //x-labels (as grid area) spacing and size;
     $("#values").attr({
       "style": "grid-template-columns: repeat(" + data.length + ", 1fr); "+
       "grid-column-gap: " + barSpacing + "px; "+
@@ -168,10 +169,18 @@ $(function(){
         "class": "x-label",
         "style": "padding: 5px; border-radius: 0 0 " + barRadius + "px " + barRadius + "px; " + xStyle,
       }).text(Object.values(data[i])[0]);
+      //append x-labels
       xBarLabel.appendTo("#values");
-    }
+
+      // create full x-labels revealed by hover events (for labels that overflow)
+      function createHoverLabels (){
+        $("<span></span>").text(Object.values[i][0]).appendTo();
+      }
+
+    } //the end of the loop
   }
   generateBars();
+
 
 // fill the chart title with custom text of a custom size and custom colour
   function fillTitle(){
