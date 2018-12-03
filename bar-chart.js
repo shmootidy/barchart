@@ -77,7 +77,7 @@ $(function(){
       "grid-template-columns: repeat(" + data.length + ", 1fr); " +
       "padding: 5px " + barSpacing + "px 0 " + barSpacing + "px", //not sure if the top (5px) should stay
     });
-
+    //x-labels spacing and size;
     $("#values").attr({
       "style": "grid-template-columns: repeat(" + data.length + ", 1fr); "+
       "grid-column-gap: " + barSpacing + "px; "+
@@ -145,7 +145,6 @@ $(function(){
       bar.appendTo(".bars");
 
       //x-axis labels
-      var xClassName = "values-label-";
       var xStyle = getXStyle();
 
       //alternate colours of x-axis labels to match their bars
@@ -166,7 +165,7 @@ $(function(){
       }
       //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
-        "class": xClassName,
+        "class": "x-label",
         "style": "padding: 5px; border-radius: 0 0 " + barRadius + "px " + barRadius + "px; " + xStyle,
       }).text(Object.values(data[i])[0]);
       xBarLabel.appendTo("#values");
