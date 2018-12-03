@@ -2,7 +2,7 @@ $(function(){
   var data = [
     {item: "a",
      amount: 0},
-    {item: "b",
+    {item: "bjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjh",
      amount: 46},
     {item: "c",
      amount: 34},
@@ -16,7 +16,7 @@ $(function(){
   var options = {
     chart: {
       chartWidth: 600,
-      chartHeight: 200,
+      chartHeight: 300,
       chartTitle: {
         title: "My Bar Chart",
         fontSize: 36,
@@ -166,7 +166,7 @@ $("#barsBox").attr({
       //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
         "class": xClassName,
-        "style": "padding: 5px 0; border-radius: 0 0 " + barRadius + "px " + barRadius + "px; " + xStyle,
+        "style": "padding: 5px; border-radius: 0 0 " + barRadius + "px " + barRadius + "px; " + xStyle,
       }).text(Object.values(data[i])[0]);
       xBarLabel.appendTo("#values");
     }
