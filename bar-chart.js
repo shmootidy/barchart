@@ -47,6 +47,9 @@ $(function(){
   var element;
 //                 ***** END OF USER INPUT *****
 
+// VARIABLES AHOY!
+var getBarLabelHeight;
+
   var topAmountIntegers = getTopAmount().toString().length;
   var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
 //crawl through options to return desired value
@@ -107,7 +110,7 @@ $(function(){
 
       //give bars in-bar labels
       var inBarLabelHeight = getOptions("inBarLabelHeight");
-      var getBarLabelHeight;
+
       getBarLabelHeight = function() {
         if (inBarLabelHeight === 1){
           if (getBarHeightAsPercent() < 90){
@@ -133,14 +136,14 @@ $(function(){
           return "top: -20px";
         }
       };
-      var getBarHeightAsPercent;
-      getBarHeightAsPercent = function(){
+
+      function getBarHeightAsPercent(){
         var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
         if (chartZoomCheck() == 2){
           barHeightAsPercent = barHeightAsPercent * 2;
         }
         return barHeightAsPercent;
-      };
+      }
       var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
       inBarLabelHeight = getBarLabelHeight();
       inBarLabel.attr({
@@ -155,8 +158,7 @@ $(function(){
       var xStyle = getXStyle();
 
       //alternate colours of x-axis labels to match their bars
-      var getXStyle;
-      getXStyle = function(){
+      function getXStyle(){
         var barColor;
         if (i % 2 === 0){
            barColor = getOptions("odd");
@@ -170,7 +172,7 @@ $(function(){
         } else if (getOptions("xStyle") === 3){
           return "color: " + barColor;
         }
-      };
+      }
       //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
         "class": "x-label",
@@ -270,6 +272,7 @@ $(function(){
 //aiming to fit everything in here
   makeBarChart(data, options, element);
   function makeBarChart(data, options, element){
+
   }
 
 });
