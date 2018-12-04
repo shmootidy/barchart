@@ -1,17 +1,19 @@
 /*globals $:false */
 $(function(){
+
+//                    ********** USER INPUT **********
   var data = [
-    {item: "a",
+    {item: "aadfadfasdf",
      amount: 0},
-    {item: "b",
+    {item: "bcxvcxvxcv",
      amount: 46},
-    {item: "c",
+    {item: "cjhjdjskska",
      amount: 34},
     {item: "dadfasdfasdfasdfasdffasd",
      amount: 26},
-    {item: "e",
+    {item: "ertuwisdhfsdfga",
      amount: 9},
-    {item: "f",
+    {item: "fasdfasdfashaj",
      amount: 31},
   ];
   var options = {
@@ -43,7 +45,7 @@ $(function(){
     }
   };
   var element;
-// ***** END OF USER INPUT *****
+//                 ***** END OF USER INPUT *****
 
   var topAmountIntegers = getTopAmount().toString().length;
   var topTest = getTopAmount()/Math.pow(10, topAmountIntegers);
@@ -87,6 +89,7 @@ $(function(){
     });
 
     //loop through data to create bars
+    var num = 0;
     for (var i = 0; i < data.length; i++){
       var barHeight = Object.values(data[i])[1];
 
@@ -95,7 +98,8 @@ $(function(){
 
       //create bars and give height
       var barRadius = getOptions("barRadius");
-      var barClassName = "bar-";
+      num++;
+      var barClassName = "bar-" + num;
       var bar = $("<div></div>").attr({
         "class": barClassName,
         "style": "grid-row-start: " + barHeightInverse + "; border-radius: " + barRadius + "px " + barRadius + "px 0 0",
@@ -103,7 +107,8 @@ $(function(){
 
       //give bars in-bar labels
       var inBarLabelHeight = getOptions("inBarLabelHeight");
-      function getBarLabelHeight() {
+      var getBarLabelHeight;
+      getBarLabelHeight = function() {
         if (inBarLabelHeight === 1){
           if (getBarHeightAsPercent() < 90){
             return "top: -20px";
@@ -127,14 +132,15 @@ $(function(){
         } else {
           return "top: -20px";
         }
-      }
-      function getBarHeightAsPercent(){
+      };
+      var getBarHeightAsPercent;
+      getBarHeightAsPercent = function(){
         var barHeightAsPercent = Math.round(barHeight/Math.pow(10, topAmountIntegers) * 100);
         if (chartZoomCheck() == 2){
           barHeightAsPercent = barHeightAsPercent * 2;
         }
         return barHeightAsPercent;
-      }
+      };
       var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
       inBarLabelHeight = getBarLabelHeight();
       inBarLabel.attr({
@@ -149,7 +155,8 @@ $(function(){
       var xStyle = getXStyle();
 
       //alternate colours of x-axis labels to match their bars
-      function getXStyle(){
+      var getXStyle;
+      getXStyle = function(){
         var barColor;
         if (i % 2 === 0){
            barColor = getOptions("odd");
@@ -163,7 +170,7 @@ $(function(){
         } else if (getOptions("xStyle") === 3){
           return "color: " + barColor;
         }
-      }
+      };
       //create and append x-axis labels
       var xBarLabel = $("<div></div>").attr({
         "class": "x-label",
@@ -171,14 +178,8 @@ $(function(){
       }).text(Object.values(data[i])[0]);
       //append x-labels
       xBarLabel.appendTo("#values");
-
-      // create full x-labels revealed by hover events (for labels that overflow)
-      function createHoverLabels (){
-        $("<span></span>").text(Object.values[i][0]).appendTo();
-      }
-
     } //the end of the loop
-  }
+  } //end of generateBar() function
   generateBars();
 
 
@@ -221,10 +222,14 @@ $(function(){
     var amountArray = [];
     for (var i = 0; i < data.length; i++){
       amountArray.push(Object.values(data[i])[1]);
-      amountArray.sort((a, b) => b - a); // got this from SO.com, don't understand how it works
+      amountArray.sort(sortAmounts); // got an explanation (and different way of expressing) the same function which helps me understand (though I'm still not fully clear what's happening)
     }
     var topAmount = amountArray[0];
     return topAmount;
+  }
+  //sorting function for the input amount array (to find top amount)
+  function sortAmounts (a, b) {
+    return a > b ? -1 : b > a ? 1 : 0;
   }
 
   function generateYAxis(){
@@ -265,7 +270,6 @@ $(function(){
 //aiming to fit everything in here
   makeBarChart(data, options, element);
   function makeBarChart(data, options, element){
-
   }
 
 });
