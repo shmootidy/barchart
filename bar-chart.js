@@ -86,7 +86,7 @@ $(function(){
     "</span></div>"+
   "</div>").prependTo(element);
 
-  // SETTING THE ATTRIBUTES
+  // SET THE ATTRIBUTES
     // dimensions of the chart
     var chartHeight = getOptions("chartHeight"); //not sure if I should move all variables to the top; there is no consensus, it seems
     var chartWidth = getOptions("chartWidth");
@@ -166,7 +166,7 @@ $(function(){
 
   // LOOP 2 of 2 -- create and append the y-labels and ticks
     var yLabel = getTopValue();
-    for (var y = 0; y < yAxisTicks; y++){
+    for (var y = 0; y <= yAxisTicks; y++){
       // Y-LABELS
       $("<div class='numbers'>" + yLabel + "</div>").appendTo("#numbers");
       yLabel = yLabel - (Math.pow(10, (topAmountIntegers - 1)) * (10 / yAxisTicks)) / chartZoomCheck();
