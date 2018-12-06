@@ -44,7 +44,7 @@ $(function(){
       yAxisTicks: 2, //two option: 1 - 10 ticks; 2 - 5 ticks
     }
   };
-  var element;
+  var element = "body";
 //                 ***** END OF USER INPUT *****
 
   function makeBarChart(data, options, element){
@@ -55,6 +55,37 @@ $(function(){
     var barHeightAsPercent;
     var yAxisTicks = getYAxisTicks();
 
+  // CREATE THE HTML FRAMEWORK
+    $("<div id='chart'>"+
+    "<h1><!-- chart title goes here --></h1>"+
+    "<div id='y-title'>"+
+      "<!-- y title goes here -->"+
+    "</div>"+
+    "<div id='yBox'>"+
+      "<div id='numbers'>"+
+        "<!-- y-axis labels go here -->"+
+      "</div>"+
+    "</div>"+
+    "<div id='tickBox'>"+
+      "<div id='ticks'>"+
+        "<!-- ticks go here -->"+
+      "</div>"+
+    "</div>"+
+    "<div id='barsBox'>"+
+      "<div class='bars'>"+
+        "<!-- bars go here -->"+
+      "</div>"+
+    "</div>"+
+    "<div id='xBox'>"+
+      "<div id='values'>"+
+        "<!-- x-axis labels go here -->"+
+      "</div>"+
+    "</div>"+
+    "<div id='x-axis'><span>"+
+      "<!-- x-axis title goes here -->"+
+    "</span></div>"+
+  "</div>").prependTo(element);
+
   // SETTING THE ATTRIBUTES
     // dimensions of the chart
     var chartHeight = getOptions("chartHeight"); //not sure if I should move all variables to the top; there is no consensus, it seems
@@ -63,7 +94,7 @@ $(function(){
       "style": "height: " + chartHeight + "px; width: " + chartWidth + "px",
     });
 
-    // size of and space between bars
+    // number of and space between bars
     var barSpacing = getOptions("barSpacing");
     $(".bars").attr({
       "style": "grid-column-gap: " + barSpacing + "px; "+
@@ -71,13 +102,15 @@ $(function(){
       "padding: 5px " + barSpacing + "px 0 " + barSpacing + "px", //not sure if the top (5px) should stay
     });
 
-    // size of and space between x-labels
+    // number of and space between x-labels
     $("#values").attr({
       "style": "grid-template-columns: repeat(" + data.length + ", 1fr); "+
       "grid-column-gap: " + barSpacing + "px; "+
       "padding: 2px " + (barSpacing + 1) + "px; "+
       "width: " + chartWidth + "px",
     });
+
+    // number of y-axis ticks
     $("#numbers").attr({
       "style": "grid-template-rows: repeat(" + yAxisTicks + ", 1fr)",
     });
@@ -109,16 +142,15 @@ $(function(){
       var barHeight = Object.values(data[i])[1];
       var barHeightInverse = 100 - getBarHeightAsPercent(barHeight);
       var barRadius = getOptions("barRadius");
-      var barClassName = "bar-";
       var bar = $("<div></div>").attr({
-        "class": barClassName,
+        "class": "bar-",
         "style": "grid-row-start: " + barHeightInverse + "; border-radius: " + barRadius + "px " + barRadius + "px 0 0",
       });
       // IN-BAR LABELS
       var inBarLabel = $("<span></span>").text(Object.values(data[i])[1]);
-      var fixedInBarLabelHeight = getBarLabelHeight(barHeight);
+      var correctedInBarLabelHeight = getBarLabelHeight(barHeight);
       inBarLabel.attr({
-        "style": fixedInBarLabelHeight,
+        "style": correctedInBarLabelHeight,
       });
       // X-LABELS
       var xStyle = getXStyle(i);
@@ -139,7 +171,7 @@ $(function(){
       $("<div class='numbers'>" + yLabel + "</div>").appendTo("#numbers");
       yLabel = yLabel - (Math.pow(10, (topAmountIntegers - 1)) * (10 / yAxisTicks)) / chartZoomCheck();
       // TICKS
-      $("<div class='ticks'>" + "" + "</div>").appendTo("#ticks");
+      $("<div class='ticks'></div>").appendTo("#ticks");
     }
 
   //THE FUNCTIONS
