@@ -1,1 +1,0 @@
-Hello! This application will allow users to generate bar charts on their webpages!
