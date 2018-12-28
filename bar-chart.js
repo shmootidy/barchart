@@ -53,7 +53,7 @@ $(function(){
 
 
   // SET THE ATTRIBUTES
-    // dimensions of the chart
+    // dimensions of the chart (#barBox)
     var chartHeight = getOptions("chartHeight"); //not sure if I should move all variables to the top; there is no consensus, it seems
     var chartWidth = getOptions("chartWidth");
     $("#barsBox").attr({
@@ -131,10 +131,12 @@ $(function(){
       }).text(Object.values(data[i])[0]);
 
       // append each element
+      console.log(inBarLabel.length);
       inBarLabel.appendTo(bar);
       xBarLabel.appendTo("#values");
       bar.appendTo("." + randomClass + " .bars");
     }
+
 
   // LOOP 2 of 2 -- create and append the y-labels and ticks
     var yLabel = getTopValue();
@@ -283,6 +285,8 @@ $(function(){
      amount: 9},
     {item: "fasdfasdfashaj",
      amount: 31},
+    {item: "llsadfbnbk",
+    amount: 27},
   ];
   var options = {
     chart: {
@@ -300,7 +304,7 @@ $(function(){
         odd: "#ffa676",
         even: "#9bd2ad",
       },
-      inBarLabelHeight: 1, // four options: 1 - hover; 2 - top; 3- middle; 4 - bottom
+      inBarLabelHeight: 2, // four options: 1 - hover; 2 - top; 3- middle; 4 - bottom
       barRadius: 3,
     },
     xAxis: {
@@ -328,7 +332,7 @@ $(function(){
       chartWidth: 600,
       chartHeight: 300,
       chartTitle: {
-        title: "My Bar Chart",
+        title: "",
         fontSize: 36,
         fontColor: "#eee",
       },
