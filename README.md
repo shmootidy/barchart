@@ -63,7 +63,7 @@ Many a resource was encountered and used in the making of this chart.
 * https://stackoverflow.com/questions/1063007/how-to-sort-an-array-of-integers-correctly
 * https://alligator.io/js/array-sort-numbers/
 * https://stackoverflow.com/questions/47945353/is-it-possible-to-create-vertical-text-that-spans-all-rows-in-a-css-grid
-* https://webflow.com/blog/how-to-create-a-thumbnail-overlay - blagh
+* https://webflow.com/blog/how-to-create-a-thumbnail-overlay 
 * https://stackoverflow.com/questions/6805482/css3-transition-animation-on-load
 * https://www.atlassian.com/git/tutorials/using-branches/git-merge
 * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -73,3 +73,4 @@ Many a resource was encountered and used in the making of this chart.
 
 I'd also like to thank my friends at Vancouver's Coffee and Code for feedback and guidance on this project. Comments like, "People still use float?" helped more than you might think!
 
+Shmoo Tidy
