@@ -2,6 +2,11 @@ Hello! This is an application for a customizable bar chart and my submission for
 
 The bar chart is a simple API function - makeBarChart() - with three paramaters: data (an array of items and their amount); options (customizable properties of the bar chart, such as size, colours, etc.); element (where you would like the bar chart to be appended on your webpage).
 
+![barchart image 1]
+(https://imgur.com/YX6WIL3)
+![barchart image 2]
+(https://imgur.com/WRieQmq)
+
 SUPPORTED FEATURES
 To customize this bar chart, all you need to do is adjust the values of the parameters. The `options` is where the majority of the bar chart's features are. You can customize...
 
